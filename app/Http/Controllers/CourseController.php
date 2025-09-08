@@ -120,6 +120,8 @@ class CourseController extends Controller
             return back()->with('error', 'يجب أن تكون طالباً للتسجيل في الكورسات');
         }
 
+        
+
         // التحقق إذا كان مسجل بالفعل ونشط
         $existingEnrollment = Enrollment::where('user_id', $user->id)
                                       ->where('course_id', $course->id)

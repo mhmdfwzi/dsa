@@ -1,0 +1,273 @@
+/* أنماط صفحات المصادقة - تصميم محسّن */
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary: #7c3aed;
+    --light: #f5f3ff;
+    --dark: #1e1b4b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+}
+
+.auth-body {
+    font-family: 'Tajawal', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 450px;
+    transition: transform 0.3s ease;
+}
+
+.auth-container:hover {
+    transform: translateY(-5px);
+}
+
+.auth-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.auth-header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 50%;
+}
+
+.auth-header h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.auth-header p {
+    margin: 10px 0 0;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.auth-content {
+    padding: 30px;
+}
+
+.auth-form .form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.auth-form .form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--dark);
+    display: block;
+    font-size: 0.9rem;
+}
+
+.auth-form .form-control {
+    padding: 15px 15px;
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+    width: 100%;
+    transition: all 0.3s;
+    font-size: 1rem;
+    background: #f8fafc;
+}
+
+.auth-form .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    background: white;
+}
+
+.auth-form .form-control.is-invalid {
+    border-color: var(--danger);
+}
+
+.auth-form .invalid-feedback {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #64748b;
+    transition: color 0.3s;
+}
+
+.password-toggle-icon:hover {
+    color: var(--primary);
+}
+
+.terms-check {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.terms-check .form-check-input {
+    margin-top: 0.2rem;
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.terms-check .form-check-label {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.terms-check a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.terms-check a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.btn-auth {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+}
+
+.auth-footer {
+    text-align: center;
+    padding: 20px 30px 30px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.auth-footer p {
+    margin: 0;
+    color: #64748b;
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.auth-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* تأثيرات إضافية */
+.auth-progress {
+    height: 5px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.auth-progress-bar {
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.password-strength {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* تنسيقات للهواتف */
+@media (max-width: 576px) {
+    .auth-body {
+        padding: 15px;
+    }
+    
+    .auth-container {
+        border-radius: 15px;
+        max-width: 100%;
+    }
+    
+    .auth-header {
+        padding: 25px;
+    }
+    
+    .auth-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .auth-content {
+        padding: 25px;
+    }
+    
+    .auth-footer {
+        padding: 15px 25px 25px;
+    }
+}
+
+/* رسومات خلفية ديكورية */
+.auth-decoration {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.decoration-1 {
+    top: 10%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+    background: var(--primary);
+    border-radius: 50%;
+}
+
+.decoration-2 {
+    bottom: 20%;
+    right: 15%;
+    width: 150px;
+    height: 150px;
+    background: var(--secondary);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}

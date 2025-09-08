@@ -1,0 +1,58 @@
+/* تنسيقات مخصصة للواجهة الأمامية */
+body {
+    font-family: 'Tajawal', sans-serif;
+    line-height: 1.6;
+}
+
+.course-header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+}
+
+.rating-star {
+    color: #f59e0b;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.related-course-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.related-course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+}
+
+.breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.breadcrumb-item a:hover {
+    color: white;
+}
+
+.review-item {
+    border-bottom: 1px solid #eee;
+}
+
+/* تنسيقات للهواتف */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .course-header {
+        padding: 2rem 0;
+    }
+}

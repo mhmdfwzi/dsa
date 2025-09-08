@@ -119,14 +119,6 @@ class User extends Authenticatable
     }
 
     /**
-     * التحقق إذا كان المستخدم طالبًا
-     */
-    public function isStudent()
-    {
-        return $this->role === 'student';
-    }
-
-    /**
      * الحصول على صورة الملف الشخصي
      */
     public function getProfilePhotoUrlAttribute()

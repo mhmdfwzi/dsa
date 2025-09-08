@@ -7,10 +7,6 @@ use App\Models\Enrollment;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Models\User;
-
-
 
 class CourseController extends Controller
 {
@@ -115,12 +111,10 @@ class CourseController extends Controller
     {
         $user = Auth::user();
 
-        // التحقق إذا كان المستخدم طالباً
-        if (!$user->isStudent()) {
+        // التحقق المباشر من دور المستخدم (بدون استخدام isStudent())
+        if ($user->role !== 'student') {
             return back()->with('error', 'يجب أن تكون طالباً للتسجيل في الكورسات');
         }
-
-        
 
         // التحقق إذا كان مسجل بالفعل ونشط
         $existingEnrollment = Enrollment::where('user_id', $user->id)

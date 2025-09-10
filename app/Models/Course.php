@@ -6,13 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Review;
 use App\Models\Enrollment;
 use App\Models\User;
+use App\Models\Category;
 
 class Course extends Model
 {
-    protected $fillable = ['title', 'description', 'price', 'image'];
+    protected $fillable = [
+        'title', 
+        'description', 
+        'price', 
+        'image', 
+        'instructor_name',
+        'trainer_id',
+        'category_id',
+        'requires_approval',
+        'duration',
+        'level'
+    ];
 
     protected $casts = [
         'price' => 'decimal:2',
+        'requires_approval' => 'boolean',
     ];
 
     // العلاقات
@@ -25,16 +38,21 @@ class Course extends Model
     {
         return $this->hasMany(Enrollment::class);
     }
-    public function trainer()
-{
-    return $this->belongsTo(User::class, 'trainer_id');
-}
 
-    // دالة للحصول على عدد الطلاب النشطين
-public function getActiveStudentsCountAttribute()
-{
-    return $this->enrollments()->whereIn('status', ['pending', 'approved'])->count();
-}
+    public function trainer()
+    {
+        return $this->belongsTo(User::class, 'trainer_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'enrollments')->withTimestamps();
+    }
 
     // Accessors
     public function getAverageRatingAttribute()
@@ -76,8 +94,27 @@ public function getActiveStudentsCountAttribute()
     {
         return $this->created_at->format('d/m/Y H:i');
     }
-    public function students()
-{
-    return $this->belongsToMany(User::class, 'enrollments')->withTimestamps();
-}
+
+    public function getActiveStudentsCountAttribute()
+    {
+        return $this->enrollments()->whereIn('status', ['pending', 'approved'])->count();
+    }
+
+    public function getDurationTextAttribute()
+    {
+        if (!$this->duration) return 'غير محدد';
+        
+        return $this->duration . ' ساعة';
+    }
+
+    public function getLevelTextAttribute()
+    {
+        $levels = [
+            'beginner' => 'مبتدئ',
+            'intermediate' => 'متوسط',
+            'advanced' => 'متقدم'
+        ];
+        
+        return $levels[$this->level] ?? 'غير محدد';
+    }
 }

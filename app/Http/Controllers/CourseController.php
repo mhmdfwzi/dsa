@@ -7,6 +7,7 @@ use App\Models\Enrollment;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -101,7 +102,7 @@ class CourseController extends Controller
             }
         }
 
-        return view('courses.show', compact('course', 'relatedCourses', 'isEnrolled', 'enrollmentStatus'));
+        return view('frontend.courses.show', compact('course', 'relatedCourses', 'isEnrolled', 'enrollmentStatus'));
     }
 
     /**
@@ -191,4 +192,5 @@ class CourseController extends Controller
         
         return view('courses.index', compact('courses', 'categories'));
     }
+
 }

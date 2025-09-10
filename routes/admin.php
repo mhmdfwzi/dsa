@@ -16,13 +16,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // إدارة الكورسات
-    Route::get('/courses', [AdminCourseController::class, 'index'])->name('courses.index');
-    Route::get('/courses/create', [AdminCourseController::class, 'create'])->name('courses.create');
-    Route::post('/courses', [AdminCourseController::class, 'store'])->name('courses.store');
-    Route::get('/courses/{course}/edit', [AdminCourseController::class, 'edit'])->name('courses.edit');
-    Route::put('/courses/{course}', [AdminCourseController::class, 'update'])->name('courses.update');
-    Route::delete('/courses/{course}', [AdminCourseController::class, 'destroy'])->name('courses.destroy');
-
+    Route::resource('courses', AdminCourseController::class);
+    
     // إدارة التسجيلات
     Route::prefix('enrollments')->name('enrollments.')->group(function () {
         Route::get('/', [AdminEnrollmentController::class, 'index'])->name('index');

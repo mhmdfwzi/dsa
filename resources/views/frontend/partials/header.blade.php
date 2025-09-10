@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <i class="fas fa-graduation-cap me-2"></i>
-            أكاديمية المهارات الرقمية
+            <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="شعار أكاديمية المهارات الرقمية" class="logo">
+            <span>أكاديمية المهارات الرقمية</span>
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -10,35 +10,40 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">الرئيسية</a>
+                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}" href="{{ route('courses.index') }}">الكورسات</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('team.index') }}">فريق العمل</a>
                 </li>
-            </ul>
-            
-            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">اتصل بنا</a>
+                </li>
+                
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('dashboard') }}">
-                            <i class="fas fa-user me-1"></i>
-                            {{ Auth::user()->name }}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i> {{ Auth::user()->name }}
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-link nav-link">تسجيل الخروج</button>
-                        </form>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">لوحة التحكم</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">الملف الشخصي</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">تسجيل الخروج</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">إنشاء حساب</a>
+                        <a class="nav-link btn btn-primary text-white px-3 ms-2" href="{{ route('login') }}">تسجيل الدخول</a>
                     </li>
                 @endauth
             </ul>

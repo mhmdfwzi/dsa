@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\HomeController;
 
 // ✅ الصفحة الرئيسية
 Route::get('/', [CourseController::class, 'index'])->name('home');
@@ -50,3 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/courses/category/{category}', [CourseController::class, 'byCategory'])->name('courses.byCategory');

@@ -3,66 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكاديمية المهارات الرقمية - @yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'أكاديمية المهارات الرقمية')</title>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts - Tajawal -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link href="{{ asset('css/frontend.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/css/main.css') }}" rel="stylesheet">
     
-    <style>
-        :root {
-            --primary: #4f46e5;
-            --primary-dark: #4338ca;
-            --secondary: #7c3aed;
-            --light: #f5f3ff;
-            --dark: #1e1b4b;
-            --success: #10b981;
-            --warning: #f59e0b;
-        }
-        
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #f8f9fa;
-        }
-        
-        .course-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 3rem 0;
-        }
-        
-        .rating-star {
-            color: #f59e0b;
-        }
-        
-        .related-course-card {
-            transition: transform 0.3s;
-        }
-        
-        .related-course-card:hover {
-            transform: translateY(-5px);
-        }
-    </style>
+    @yield('styles')
 </head>
-<body>
+<body class="min-h-screen">
+    <!-- Header -->
     @include('frontend.partials.header')
     
+    <!-- Main Content -->
     <main>
         @yield('content')
     </main>
     
+    <!-- Footer -->
     @include('frontend.partials.footer')
-
-    <!-- Bootstrap JS -->
+    
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
     
     @yield('scripts')
 </body>

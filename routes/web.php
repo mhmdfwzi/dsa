@@ -10,3 +10,4 @@ require __DIR__.'/front.php';
 
 // ✅ رواتس لوحة التحكم (الإدارة)
 require __DIR__.'/admin.php';
+

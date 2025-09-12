@@ -33,7 +33,7 @@ class HomeController extends Controller
         $studentsCount = User::where('role', 'student')->count();
         $trainersCount = User::where('role', 'trainer')->where('is_approved', true)->count();
         $hoursCount = Course::sum('duration') ?? 1000;
-        
+    $instructors = User::where('is_trainer', true)->take(6)->get(); // ✅ هنا التعديل        
         // آراء الطلاب (بيانات تجريبية - يمكن استبدالها ببيانات حقيقية لاحقاً)
         $testimonials = [
             [
@@ -64,7 +64,8 @@ class HomeController extends Controller
             'studentsCount',
             'trainersCount',
             'hoursCount',
-            'testimonials'
+            'testimonials',
+            'instructors' // ✅ هنا التعديل
         ));
     }
 }

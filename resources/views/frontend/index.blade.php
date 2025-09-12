@@ -1,184 +1,216 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'أكاديمية المهارات الرقمية - المنصة التعليمية الرائدة')
+@section('title', 'أكاديمية المهارات الرقمية - منصة التعليم الإلكتروني الرائدة')
 
 @section('content')
-<!-- قسم البطل -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="hero-title">طور مهاراتك الرقمية لمستقبل أفضل</h1>
-                <p class="hero-subtitle">انضم إلى آلاف الطلاب الذين يطورون مهاراتهم الرقمية ويحققون أهدافهم المهنية من خلال دوراتنا المتخصصة</p>
-                <div class="hero-actions">
-                    <a href="{{ route('courses.index') }}" class="btn btn-primary">استكشف الكورسات</a>
-                    <a href="#about" class="btn btn-outline-primary">تعرف علينا</a>
+    <!-- القسم 1: الهيرو -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>طور مهاراتك الرقمية مع <span>أكاديمية المهارات الرقمية</span></h1>
+                <p>انضم إلى آلاف الطلاب الذين يطورون مهاراتهم مع منصتنا التعليمية المتكاملة، وابدأ رحلتك نحو النجاح المهني</p>
+                <div class="hero-buttons">
+                    <a href="{{ route('courses.index') }}" class="cta-button primary">استكشف الكورسات <i class="fas fa-arrow-left"></i></a>
+                    <a href="#about" class="cta-button secondary">عن الأكاديمية <i class="fas fa-info-circle"></i></a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <img src="{{ asset('assets/frontend/images/hero-image.png') }}" alt="طلاب يتعلمون" class="hero-image">
-            </div>
         </div>
-    </div>
-</section>
+        <div class="hero-shape">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                <path class="shape-fill" d="M0,0V100H1000V0C750,100 500,100 250,100C0,100 0,0 0,0Z"></path>
+            </svg>
+        </div>
+    </section>
 
-<!-- قسم الإحصائيات -->
-<section class="stats-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-6">
-                <div class="stat-card">
+    <!-- القسم 2: الإحصائيات -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
                     <div class="stat-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <div class="stat-number">{{ $coursesCount }}</div>
-                    <div class="stat-text">كورس تعليمي</div>
+                    <h3 data-count="{{ $studentsCount }}">0</h3>
+                    <p>طالب مسجل</p>
                 </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="stat-card">
+                <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-book-open"></i>
                     </div>
-                    <div class="stat-number">{{ $studentsCount }}</div>
-                    <div class="stat-text">طالب مسجل</div>
+                    <h3 data-count="{{ $coursesCount }}">0</h3>
+                    <p>كورس تعليمي</p>
                 </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="stat-card">
+                <div class="stat-item">
                     <div class="stat-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
-                    <div class="stat-number">{{ $trainersCount }}</div>
-                    <div class="stat-text">مدرب محترف</div>
+                    <h3 data-count="{{ $trainersCount }}">0</h3>
+                    <p>مدرب محترف</p>
                 </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="stat-card">
+                <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-award"></i>
                     </div>
-                    <div class="stat-number">{{ $hoursCount }}</div>
-                    <div class="stat-text">ساعة تعليم</div>
+                    <h3 data-count="{{ $hoursCount }}">0</h3>
+                    <p>ساعة تعليمية</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- قسم الكورسات الشائعة -->
-<section class="courses-section" id="courses">
-    <div class="container">
-        <h2 class="section-title">الكورسات الشائعة</h2>
-        
-        <div class="row">
-            @foreach($popularCourses as $course)
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="course-card">
-                    <div class="course-image-container">
-                        <img src="{{ $course->image_url }}" alt="{{ $course->title }}" class="course-image">
-                        <span class="course-badge">{{ $course->category->name ?? 'عام' }}</span>
+    <!-- القسم 3: التصنيفات -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">تصفح حسب التصنيف</h2>
+                <p>اختر من بين مجموعة واسعة من التخصصات لتطوير مهاراتك</p>
+            </div>
+            <div class="categories-grid">
+                @foreach($categories as $category)
+                    <div class="category-item">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>{{ $category->name }}</h3>
+                        <p>{{ $category->courses_count }} كورس</p>
+                        <a href="{{ route('courses.byCategory', $category) }}" class="category-link">
+                            استكشف الكورسات <i class="fas fa-arrow-left"></i>
+                        </a>
                     </div>
-                    <div class="course-content">
-                        <h3 class="course-title">{{ $course->title }}</h3>
-                        <p class="course-description">{{ Str::limit($course->description, 100) }}</p>
-                        
-                        <div class="course-meta">
-                            <div class="course-rating">
-                                <i class="fas fa-star"></i> {{ number_format($course->reviews_avg_rating, 1) }} ({{ $course->reviews_count }} تقييم)
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم 4: الكورسات الشائعة -->
+    <section class="popular-courses-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">الكورسات الأكثر طلباً</h2>
+                <p>انضم إلى أفضل الكورسات التي يوصي بها طلابنا</p>
+                <a href="{{ route('courses.index') }}" class="view-all">عرض جميع الكورسات <i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="courses-grid">
+                @foreach($popularCourses as $course)
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="{{ $course->image_url }}" alt="{{ $course->title }}">
+                            <div class="course-badge">الأكثر طلباً</div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">{{ $course->category ? $course->category->name : 'بدون تصنيف' }}</div>     
+                            <h3><a href="{{ route('courses.show', $course) }}">{{ $course->title }}</a></h3>
+                            <p class="course-description">{{ Str::limit(strip_tags($course->description), 100) }}</p>
+                            <div class="course-meta">
+                                <div class="course-instructor">
+                                    <i class="fas fa-user"></i>
+                                    {{ $course->trainer ? $course->trainer->name : $course->instructor_name }}
+                                </div>
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    {{ number_format($course->reviews_avg_rating, 1) }} ({{ $course->reviews_count }} تقييم)
+                                </div>
                             </div>
-                            <div class="course-price">{{ $course->formatted_price }}</div>
-                        </div>
-                        
-                        <div class="course-actions">
-                            <a href="{{ route('courses.show', $course) }}" class="btn btn-primary">عرض التفاصيل</a>
+                            <div class="course-footer">
+                                <div class="course-price">{{ $course->formatted_price }}</div>
+                                <a href="{{ route('courses.show', $course) }}" class="course-button">التفاصيل <i class="fas fa-arrow-left"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-        
-        <div class="text-center mt-5">
-            <a href="{{ route('courses.index') }}" class="btn btn-outline-primary">عرض جميع الكورسات</a>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- قسم التصنيفات -->
-<section class="categories-section">
-    <div class="container">
-        <h2 class="section-title">التصنيفات</h2>
-        
-        <div class="row">
-            @foreach($categories as $category)
-            <div class="col-lg-3 col-md-4 col-6 mb-4">
-                <a href="{{ route('courses.byCategory', $category) }}" class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="category-title">{{ $category->name }}</h3>
-                    <p class="category-count">{{ $category->courses_count }} كورس</p>
-                </a>
+    <!-- القسم 5: المدربين -->
+    <section class="instructors-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">تعرف على مدربينا المتميزين</h2>
+                <p>تعلم من أفضل الخبراء والمتخصصين في المجال الرقمي</p>
             </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<!-- قسم المدربين -->
-<section class="trainers-section">
-    <div class="container">
-        <h2 class="section-title">مدربونا المتميزون</h2>
-        
-        <div class="row">
-            @foreach($featuredTrainers as $trainer)
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="trainer-card">
-                    <div class="trainer-image-container">
-                        <img src="{{ $trainer->profile_photo_url }}" alt="{{ $trainer->name }}" class="trainer-image">
-                    </div>
-                    <div class="trainer-content">
-                        <h3 class="trainer-name">{{ $trainer->name }}</h3>
-                        <p class="trainer-expertise">{{ $trainer->expertise }}</p>
-                        <p class="trainer-bio">{{ Str::limit($trainer->bio, 100) }}</p>
-                        
-                        <div class="trainer-social">
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <div class="instructors-grid">
+                @foreach($instructors as $instructor)
+                    <div class="instructor-card">
+                        <div class="instructor-image">
+                            <img src="{{ $instructor->profile_photo_url }}" alt="{{ $instructor->name }}">
+                            <div class="instructor-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="instructor-content">
+                            <h3>{{ $instructor->name }}</h3>
+                            <p class="expertise">{{ $instructor->expertise }}</p>
+                            <p class="bio">{{ Str::limit($instructor->bio, 100) }}</p>
+                            <div class="instructor-stats">
+                                <div class="stat">
+                                    <span class="number">{{ $instructor->taughtCourses()->count() }}</span>
+                                    <span class="label">كورس</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="number">{{ $instructor->reviews()->count() }}</span>
+                                    <span class="label">تقييم</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="number">{{ $instructor->taughtCourses()->withCount('students')->get()->sum('students_count') }}</span>
+                                    <span class="label">طالب</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- قسم آراء العملاء -->
-<section class="testimonials-section">
-    <div class="container">
-        <h2 class="section-title">آراء طلابنا</h2>
-        
-        <div class="row">
-            @foreach($testimonials as $testimonial)
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-text">"{{ $testimonial['comment'] }}"</div>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="{{ $testimonial['image'] }}" alt="{{ $testimonial['name'] }}" class="author-image">
-                        <div class="author-info">
-                            <h4 class="author-name">{{ $testimonial['name'] }}</h4>
-                            <p class="author-course">{{ $testimonial['course'] }}</p>
+    <!-- القسم 6: آراء الطلاب -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">ماذا يقول طلابنا عنا</h2>
+                <p>انضم إلى آلاف الطلاب الراضين عن تجربتهم التعليمية معنا</p>
+            </div>
+            <div class="testimonials-slider">
+                @foreach($testimonials as $testimonial)
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                            <p>"{{ $testimonial['comment'] }}"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="{{ $testimonial['image'] }}" alt="{{ $testimonial['name'] }}">
+                            <div class="author-info">
+                                <h4>{{ $testimonial['name'] }}</h4>
+                                <p>{{ $testimonial['course'] }}</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- قسم النشرة البريدية -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>اشترك في نشرتنا البريدية</h2>
+                <p>كن أول من يعرف عن الكورسات الجديدة والعروض الخاصة</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="بريدك الإلكتروني" required>
+                    <button type="submit">اشترك الآن <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
 @endsection
